@@ -1,29 +1,48 @@
-from sqlalchemy import Column, Integer, String
-from database import Base
+from init import dbs
+
+ROLE_USER = 0
+ROLE_ADMIN = 1
+
+books_authors = dbs.Table('books_authors',
+                          dbs.Column('book_id', dbs.Integer, dbs.ForeignKey('book.id'), primary_key=True),
+                          dbs.Column('author_id', dbs.Integer, dbs.ForeignKey('author.id'), primary_key=True)
+                          )
 
 
-class Book(Base):
+class Book(dbs.Model):
     __tablename__ = 'books'
-    id = Column(Integer, primary_key=True)
-    bookname = Column(String(50), unique=True)
-
-    def __init__(self, bookname):
-        self.bookname = bookname
+    id = dbs.Column(dbs.Integer, primary_key=True)
+    bookname = dbs.Column(dbs.String(50), unique=True)
 
     def __repr__(self):
         return 'book: %s' % self.bookname
 
 
-class Author(Base):
+class Author(dbs.Model):
     __tablename__ = 'authors'
-    id = Column(Integer, primary_key=True)
-    authorname = Column(String(50), unique=True)
-
-    def __init__(self, authorname):
-        self.authorname = authorname
+    id = dbs.Column(dbs.Integer, primary_key=True)
+    authorname = dbs.Column(dbs.String(50), unique=True)
 
     def __repr__(self):
         return 'author: %s' % self.authorname
 
-class AuthorBook(Base):
-    __tablename__ = 'authorbook'
+
+class User(dbs.Model):
+    id = dbs.Column(dbs.Integer, primary_key=True)
+    login = dbs.Column(dbs.String(50), unique=True)
+    password = dbs.Column(dbs.String(50))
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
+
+
+
