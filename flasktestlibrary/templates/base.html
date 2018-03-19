@@ -7,10 +7,20 @@
     {% endif %}
   </head>
   <body>
-    <div>Library: <a href="/index">Home  </a>
+    <div>
+        <a href="/library">Library</a>
+        <a href="/search">Search</a>
+        <a href="/index">Home  </a>
         <a href="/registration">Registration  </a> <a href="/login">Log in  </a>
-        <a href="/logout">Log out  </a>
-    <a href="/settings">Settings  </a></div>
+        {% if user %}
+            {% if user.is_authenticated%}
+            <a href="/logout">Log out  </a>
+            <a href="/settings">Settings  </a>
+                <a href="/bookpreedit">Editing books  </a>
+                <a href="/authorpreedit">Editing authors  </a>
+            {% endif %}
+        {% endif %}
+    </div>
 <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}

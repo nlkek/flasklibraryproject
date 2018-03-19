@@ -1,5 +1,4 @@
 from init import dbs
-
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
@@ -10,16 +9,17 @@ books_authors = dbs.Table('books_authors',
 
 
 class Book(dbs.Model):
-    __tablename__ = 'books'
+    __tablename__ = 'book'
     id = dbs.Column(dbs.Integer, primary_key=True)
     bookname = dbs.Column(dbs.String(50), unique=True)
+    authors = dbs.relationship('Author', secondary=books_authors, lazy='subquery', backref=dbs.backref('books', lazy=True))
 
     def __repr__(self):
         return 'book: %s' % self.bookname
 
 
 class Author(dbs.Model):
-    __tablename__ = 'authors'
+    __tablename__ = 'author'
     id = dbs.Column(dbs.Integer, primary_key=True)
     authorname = dbs.Column(dbs.String(50), unique=True)
 

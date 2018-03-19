@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post" name="search">
+{{ form.hidden_tag() }}
+    {{ form.search_radio }}
+     {{ form.search_attr }}
+    <p><input type="submit" value="Search"></p>
+</form>
+
+    {% for book in books %}
+    <div><h2><ol>{{book.bookname}}</ol> </h2></div>
+    <p> authors:</p>
+    {% for author in book.authors %}
+        <div>  <li>{{ author.authorname }}</li></div>
+        {% endfor %}
+{% endfor %}
+
+     {% for author in authors %}
+    <div><h2><ol>{{author.authorname}}</ol> </h2></div>
+    <p> books:</p>
+    {% for book in author.books %}
+        <div>  <li>{{ book.bookname }}</li></div>
+        {% endfor %}
+{% endfor %}
+
+{% endblock %}

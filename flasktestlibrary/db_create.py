@@ -1,4 +1,4 @@
-from migrate.versioning import api
+#from migrate.versioning import api
 from config import SQLALCHEMY_DATABASE_URI
 from init import dbs
 import os.path

@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Hi, {{user.nickname}}!</h1>
+
 {% for book in books %}
-<div><p>{{book.author.nickname}} has: <b>{{book.book}}</b></p></div>
+    <div><h2><ol>{{book.bookname}}</ol> </h2></div>
+    <p> authors:</p>
+    {% for author in book.authors %}
+        <div>  <li>{{ author.authorname }}</li></div>
+        {% endfor %}
 {% endfor %}
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends "authorpreedit.html" %}
+{% block contentt %}
+    <hr>
+    Choose author you want to delete:<br>
+<form action="" method="post" name="delete">
+{{ form.hidden_tag() }}
+    {{ form.list_of_obj }}
+    <p><input type="submit" value="Delete author"></p>
+</form>
+{% endblock %}
