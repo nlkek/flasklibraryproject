@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from init import app
 from flask import render_template, flash, redirect, url_for, request
 from forms import LoginForm, SearchForm, BookEditForm, AddForm, DeleteForm
@@ -16,7 +17,7 @@ def load_user(user_id):
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template('base.html', user=current_user)
+    return render_template('basee.html', user=current_user)
 
 
 @app.route("/logout")
@@ -58,7 +59,7 @@ def register():
         login_user(user)
         flash('Registration successful: ' + form.login.data)
         return redirect(url_for('index'))
-    return render_template('registration.html', form=form)
+    return render_template('registration.html', form=form, user=current_user)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -74,7 +75,7 @@ def login():
             flash('wrong pass')
         else:
             flash('no such user')
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, user=current_user)
 
 
 @app.route("/search", methods=['GET', 'POST'])
@@ -115,11 +116,11 @@ def bookedit():
     form.list_of_authors.choices = [(author.id, author.authorname) for author in Author.query.all()]
     book = Book.query.all()[0]
     if request.method == 'POST':
-        if request.form['submit'] == 'show book info':
+        if request.form['submit'] == u'Показать авторский состав выбранной книги':
             book = Book.query.get(form.list_of_books.data)
             return render_template('editing.html', form=form, user=current_user, book=book)
     if request.method == 'POST':
-        if request.form['submit'] == 'add author':
+        if request.form['submit'] == u'Добавить выбранного автора в авторский состав выбранной книги':
             author = Author.query.get(form.list_of_authors.data)
             book = Book.query.get(form.list_of_books.data)
             book.authors.append(author)
@@ -127,7 +128,7 @@ def bookedit():
             dbs.session.commit()
             return render_template('editing.html', form=form, user=current_user, book=book)
     if request.method == 'POST':
-        if request.form['submit'] == 'delete author':
+        if request.form['submit'] == u'Удалить выбранного автора из авторского состава выбранной книги':
             author = Author.query.get(form.list_of_authors.data)
             book = Book.query.get(form.list_of_books.data)
             if author in book.authors:
@@ -161,7 +162,6 @@ def deletebook():
     form.list_of_obj.choices = [(book.id, book.bookname) for book in Book.query.all()]
     if form.validate_on_submit():
         book = Book.query.get(form.list_of_obj.data)
-        print(form.list_of_obj.data)
         dbs.session.delete(book)
         dbs.session.commit()
         return redirect(url_for('deletebook'))

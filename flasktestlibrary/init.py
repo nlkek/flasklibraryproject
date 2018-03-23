@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
 from flask.ext.login import LoginManager
 from config import basedir
+from flask_bootstrap import Bootstrap
 
 app = Flask('__main__')
 app.config.from_object('config')

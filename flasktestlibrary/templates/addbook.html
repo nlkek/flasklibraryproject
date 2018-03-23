@@ -2,7 +2,7 @@
 {% block contentt %}
         <hr>
     Enter name of the book you want to add:<br>
-<form action="" method="post" name="add">
+<form class="form form-horizontal" method="post" role="form" name="add">
 {{ form.hidden_tag() }}
     {{ form.name }}
     <p><input type="submit" value="Add book"></p>

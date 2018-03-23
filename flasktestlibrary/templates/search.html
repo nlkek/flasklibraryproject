@@ -1,10 +1,11 @@
-{% extends "base.html" %}
+{% extends "basee.html" %}
 {% block content %}
 <form action="" method="post" name="search">
 {{ form.hidden_tag() }}
     {{ form.search_radio }}
      {{ form.search_attr }}
     <p><input type="submit" value="Search"></p>
+<input class="btn btn-primary" type="submit" value="Login">
 </form>
 
     {% for book in books %}

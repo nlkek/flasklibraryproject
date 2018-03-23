@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
 from wtforms import TextField, BooleanField, PasswordField, StringField, RadioField, SelectField
 from wtforms.validators import Required, DataRequired
@@ -23,6 +24,6 @@ class DeleteForm(Form):
 
 
 class BookEditForm(Form):
-    list_of_books = SelectField('book', coerce=int, validators=[Required()])
-    list_of_authors = SelectField('author', coerce=int, validators=[Required()])
+    list_of_books = SelectField(u'Выберите книгу', coerce=int, validators=[Required()])
+    list_of_authors = SelectField(u'Выберите автора', coerce=int, validators=[Required()])
 
