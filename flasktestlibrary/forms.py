@@ -11,16 +11,16 @@ class LoginForm(Form):
 
 
 class SearchForm(Form):
-    search_radio = RadioField('search', choices=[('book', 'search by bookname'), ('author', 'search by author')], default='book')
-    search_attr = StringField('search_attr', validators=[Required()])
+    search_radio = RadioField('search', choices=[('book',u'Искать по названию книги'), ('author', u'Искать по автору')], default='book')
+    search_attr = StringField(u'Введите название книги или имя автора', validators=[Required()])
 
 
 class AddForm(Form):
-    name = StringField('name', validators=[Required()])
+    name = StringField(u'Введите название книги', validators=[Required()])
 
 
 class DeleteForm(Form):
-    list_of_obj = SelectField('objs', coerce=int, validators=[Required()])
+    list_of_obj = SelectField(u'Выберите книгу', coerce=int, validators=[Required()])
 
 
 class BookEditForm(Form):

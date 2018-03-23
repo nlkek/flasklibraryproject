@@ -84,12 +84,16 @@ def search():
     if form.validate_on_submit():
         if form.search_radio.data == 'book':
             books = Book.query.filter(Book.bookname.contains(form.search_attr.data)).all()
+            if not books:
+                flash(u"Нет такой книги")
             return render_template('search.html',
                                    form=form,
                                    user=current_user,
                                    books=books)
         else:
             authors = Author.query.filter(Author.authorname.contains(form.search_attr.data)).all()
+            if not authors:
+                flash(u"Нет такого автора")
             return render_template('search.html',
                                    form=form,
                                    user=current_user,
@@ -119,7 +123,6 @@ def bookedit():
         if request.form['submit'] == u'Показать авторский состав выбранной книги':
             book = Book.query.get(form.list_of_books.data)
             return render_template('editing.html', form=form, user=current_user, book=book)
-    if request.method == 'POST':
         if request.form['submit'] == u'Добавить выбранного автора в авторский состав выбранной книги':
             author = Author.query.get(form.list_of_authors.data)
             book = Book.query.get(form.list_of_books.data)
@@ -127,7 +130,6 @@ def bookedit():
             dbs.session.add(book)
             dbs.session.commit()
             return render_template('editing.html', form=form, user=current_user, book=book)
-    if request.method == 'POST':
         if request.form['submit'] == u'Удалить выбранного автора из авторского состава выбранной книги':
             author = Author.query.get(form.list_of_authors.data)
             book = Book.query.get(form.list_of_books.data)
@@ -143,6 +145,13 @@ def bookedit():
 def authoredit():
     pass
 
+#############
+############
+################
+##################
+###################3
+#ДОБАВИТЬ ПРОВЕРКУ НА СУЩЕСТВОВАНИЕ ДОБАВЛЯЕМОЙ КНИГИ
+
 
 @app.route("/addbook", methods=['GET', 'POST'])
 def addbook():
@@ -151,7 +160,7 @@ def addbook():
         book = Book(bookname=form.name.data)
         dbs.session.add(book)
         dbs.session.commit()
-        flash('Book:%s was added to the library.' % book.bookname )
+        flash(u'Книга:%s была добавлена в библиотеку' % book.bookname)
         return redirect(url_for("addbook"))
     return render_template('addbook.html', form=form, user=current_user)
 
@@ -160,11 +169,16 @@ def addbook():
 def deletebook():
     form = DeleteForm()
     form.list_of_obj.choices = [(book.id, book.bookname) for book in Book.query.all()]
-    if form.validate_on_submit():
-        book = Book.query.get(form.list_of_obj.data)
-        dbs.session.delete(book)
-        dbs.session.commit()
-        return redirect(url_for('deletebook'))
+    if request.method == 'POST':
+        if request.form['submit'] == u'Удалить книгу':
+            book = Book.query.get(form.list_of_obj.data)
+            dbs.session.delete(book)
+            dbs.session.commit()
+            flash(u'Книга:%s была удалена из библиотеки' % book.bookname)
+            return redirect(url_for('deletebook'))
+        if request.form['submit'] == u'Показать авторский состав выбранной книги':
+            book = Book.query.get(form.list_of_obj.data)
+            return render_template('deletebook.html', form=form, user=current_user, book=book)
     return render_template('deletebook.html', form=form, user=current_user)
 
 
