@@ -1,0 +1,13 @@
+{% extends "basee.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <h4><a href = "book/{{ book.id }}">{{ book.bookname }} </a></h4>
+                </div>
+            {%  endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -6,8 +6,14 @@ import models
 
 
 class LoginForm(Form):
-    login = StringField('login', validators=[Required()])
-    password = PasswordField('pass', validators=[Required()])
+    login = StringField(u'Введите логин', validators=[Required()])
+    password = PasswordField(u'Введите пароль', validators=[Required()])
+
+
+class RegistrationForm(Form):
+    login = StringField(u'Введите логин', validators=[Required()])
+    password = PasswordField(u'Введите пароль', validators=[Required()])
+    confirm_password = PasswordField(u'Повторите пароль', validators=[Required()])
 
 
 class SearchForm(Form):
@@ -15,12 +21,20 @@ class SearchForm(Form):
     search_attr = StringField(u'Введите название книги или имя автора', validators=[Required()])
 
 
-class AddForm(Form):
+class AddFormBook(Form):
     name = StringField(u'Введите название книги', validators=[Required()])
 
 
-class DeleteForm(Form):
+class DeleteFormBook(Form):
     list_of_obj = SelectField(u'Выберите книгу', coerce=int, validators=[Required()])
+
+
+class AddFormAuthor(Form):
+    name = StringField(u'Введите имя автора', validators=[Required()])
+
+
+class DeleteFormAuthor(Form):
+    list_of_obj = SelectField(u'Выберите автора', coerce=int, validators=[Required()])
 
 
 class BookEditForm(Form):

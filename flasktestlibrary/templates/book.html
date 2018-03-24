@@ -1,0 +1,18 @@
+{% extends "basee.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+    <h1>{{ book.bookname }}</h1>
+    <hr>
+
+        <div class="container-fluid">
+        <h3>Авторы:</h3>
+        <br>
+            {% for author in book.authors %}
+                {{ author.authorname }}
+                        <br>
+            {%  endfor %}
+        </div>
+
+    </div>
+{% endblock %}

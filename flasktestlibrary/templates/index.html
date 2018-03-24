@@ -1,11 +1,7 @@
 {% extends "basee.html" %}
 {% block content %}
 
-{% for book in books %}
-    <div><h2><ol>{{book.bookname}}</ol> </h2></div>
-    <p> authors:</p>
-    {% for author in book.authors %}
-        <div>  <li>{{ author.authorname }}</li></div>
-        {% endfor %}
-{% endfor %}
+    <div class="container-fluid">
+    Приветствуем Вас на сайте электронной библиотеки
+    </div>
 {% endblock %}

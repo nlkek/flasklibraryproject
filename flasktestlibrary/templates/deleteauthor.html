@@ -1,10 +1,32 @@
+{%  import "bootstrap/wtf.html" as wtf %}
 {% extends "authorpreedit.html" %}
 {% block contentt %}
-    <hr>
-    Choose author you want to delete:<br>
-<form action="" method="post" name="delete">
-{{ form.hidden_tag() }}
-    {{ form.list_of_obj }}
-    <p><input type="submit" value="Delete author"></p>
-</form>
+<div class="container-fluid">
+        <form action="" method="post" name="delete">
+            {{ form.hidden_tag() }}
+            <div class="row">
+            <div class="col-md-2">
+                {{ wtf.form_field(form.list_of_obj) }}
+                            </div>
+            </div>
+                <div class="btn-group">
+                    <input type="submit" class="btn btn-default" name="submit" value="Удалить автора">
+                <input type="submit" class="btn btn-default" name="submit" value="Показать показать книги с этим автором">
+                    </div>
+
+
+        </form>
+    </div>
+
+    <div class="container-fluid">
+    {% if author %}
+    <div><h2>{{author.authorname}}</h2></div>
+    {% for book in author.books %}
+        <div>  <li>{{ book.bookname }}</li></div>
+    {% endfor %}
+    {% endif %}
+    </div>
+
+
+
 {% endblock %}

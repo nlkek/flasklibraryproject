@@ -1,9 +1,18 @@
 {% extends "basee.html" %}
+
+
+
 {% block content %}
-    <div>
-        <a href="/addauthor">Add  </a>
-        <a href="/deleteauthor">Delete  </a>
-    </div>
+    	<nav class="navbar navbar-default">
+      <div class="container-fluid">
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <li><a href="/addauthor">Добавить автора</a></li>
+          <li><a href="/deleteauthor">Удалить автора</a></li>
+    </ul>
+</div>
+      </div>
+        </nav>
 
     {% block contentt %}{% endblock %}
 {% endblock %}

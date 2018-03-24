@@ -19,19 +19,23 @@
 
     {% for book in books %}
 
-    <div><h2><ol>{{book.bookname}}</ol> </h2></div>
-    <p> Авторы:</p>
+    <div><h2><ol><a href = "book/{{ book.id }}">{{ book.bookname }} </a></ol> </h2></div>
+    <h3>Авторы:</h3>
     {% for author in book.authors %}
-        <div>  <li>{{ author.authorname }}</li></div>
+    {{ author.authorname }}
+        <br>
         {% endfor %}
+        <hr>
 {% endfor %}
 
      {% for author in authors %}
     <div><h2><ol>{{author.authorname}}</ol> </h2></div>
-    <p> Книги:</p>
+    <h3> Книги:</h3>
     {% for book in author.books %}
-        <div>  <li>{{ book.bookname }}</li></div>
+        {{ book.bookname }}
+        <br>
         {% endfor %}
+         <hr>
 {% endfor %}
     </div>
 {% endblock %}
